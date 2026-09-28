@@ -1,0 +1,21 @@
+{
+  "name": "equiplocal",
+  "version": "1.0.0",
+  "description": "EquipLocal - Hyper-Local Equipment Rental Marketplace MVP",
+  "scripts": {
+    "server": "cd server && npm run dev",
+    "server:start": "cd server && npm start",
+    "client": "cd client && npm run dev",
+    "seed": "cd server && npm run seed"
+  },
+  "keywords": [
+    "equipment",
+    "rental",
+    "marketplace",
+    "react",
+    "nodejs",
+    "mongodb"
+  ],
+  "author": "EquipLocal Team",
+  "license": "ISC"
+}
