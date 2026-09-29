@@ -289,3 +289,5 @@ The database includes ready-to-test accounts for both sides of the marketplace:
 4. Go to **"My Equipment"** (`/owner/equipment`) to add or edit daily rental rates or toggle machine availability.
 
 5. Automatic deployment testing now---- again test
+
+testing purpose
