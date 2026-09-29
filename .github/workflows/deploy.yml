@@ -1,23 +1,52 @@
-name: Test VPS Connection
+name: Deploy EquipLocal to VPS
 
 on:
   push:
-  Branches:
-   - Equiplocal-Branch
+    branches:
+      - Equiplocal-Branch
 
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test SSH connection
+      - name: Deploy to VPS
         uses: appleboy/ssh-action@v1.2.2
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
+            set -e
+
+            echo "Connected to VPS"
             whoami
             hostname
-            pwd
-            echo "SSH connection successful"
+
+            echo "Going to project directory..."
+            cd /www/wwwroot/equiplocal
+
+            echo "Current branch:"
+            git branch --show-current
+
+            echo "Pulling latest code..."
+            git pull origin Equiplocal-Branch
+
+            echo "Installing frontend dependencies..."
+            cd /www/wwwroot/equiplocal/client
+            npm install
+
+            echo "Building frontend..."
+            npm run build
+
+            echo "Installing backend dependencies..."
+            cd /www/wwwroot/equiplocal/server
+            npm install
+
+            echo "Restarting backend..."
+            pm2 restart equiplocal-api
+
+            echo "Checking PM2 status..."
+            pm2 status
+
+            echo "Deployment completed successfully!"
