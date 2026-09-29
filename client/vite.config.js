@@ -8,11 +8,18 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+
   server: {
-    port: 3000,
+    host: '0.0.0.0',
+    port: 6762,
+
+    allowedHosts: [
+      'demo.babylonengineering.com',
+    ],
+
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',
+        target: 'https://equilbackend.babylonengineering.com',
         changeOrigin: true,
       },
     },
