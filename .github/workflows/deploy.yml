@@ -1,7 +1,9 @@
 name: Test VPS Connection
 
 on:
-  workflow_dispatch:
+  push:
+  Branches:
+  -main
 
 jobs:
   test:
