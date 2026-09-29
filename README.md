@@ -288,4 +288,4 @@ The database includes ready-to-test accounts for both sides of the marketplace:
 3. Click **"Accept"** on the incoming booking request.
 4. Go to **"My Equipment"** (`/owner/equipment`) to add or edit daily rental rates or toggle machine availability.
 
-5. Automatic deployment testing now---- again
+5. Automatic deployment testing now---- again test
