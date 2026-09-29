@@ -44,9 +44,9 @@ jobs:
             npm install
 
             echo "Restarting backend..."
-            pm2 restart equiplocal-api
+            sudo pm2 restart equiplocal-api --update-env
 
             echo "Checking PM2 status..."
-            pm2 status
+            sudo pm2 status
 
             echo "Deployment completed successfully!"
