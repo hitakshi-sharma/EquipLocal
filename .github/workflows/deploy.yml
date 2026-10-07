@@ -1,4 +1,4 @@
-name: Deploy EquipLocal to VPS
+name: Deploy EquipLocal
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy to VPS
+      - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.2.2
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -19,34 +19,12 @@ jobs:
           script: |
             set -e
 
-            echo "Connected to VPS"
-            whoami
-            hostname
+            cd /opt/equiplocal
 
-            echo "Going to project directory..."
-            cd /www/wwwroot/equiplocal
-
-            echo "Current branch:"
-            git branch --show-current
-
-            echo "Pulling latest code..."
             git pull origin Equiplocal-Branch
 
-            echo "Installing frontend dependencies..."
-            cd /www/wwwroot/equiplocal/client
-            npm install
+            docker compose down
 
-            echo "Building frontend..."
-            npm run build
+            docker compose up -d --build
 
-            echo "Installing backend dependencies..."
-            cd /www/wwwroot/equiplocal/server
-            npm install
-
-            echo "Restarting backend..."
-            sudo pm2 restart equiplocal-api --update-env
-
-            echo "Checking PM2 status..."
-            sudo pm2 status
-
-            echo "Deployment completed successfully!"
+            docker ps
